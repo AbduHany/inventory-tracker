@@ -7,6 +7,7 @@ const Footer = () => {
         <Container sx={{
             position: 'fixed',
             bottom: '20px',
+            left: '25vw',
             textAlign: 'center',
             fontSize: '12px',
             width: '50vw',

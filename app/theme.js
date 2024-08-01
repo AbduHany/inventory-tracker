@@ -5,10 +5,10 @@ import { green } from "@mui/material/colors";
 export const theme = createTheme({
     palette: {
         primary: {
-            main: green[300],
+            main: green[900],
         },
         secondary: {
-            main: green[900]
+            main: green[300]
         }
     },
     typography: {

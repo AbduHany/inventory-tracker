@@ -22,7 +22,7 @@ const CardStack = () => {
             <MyCard elevation={10}>
                 <Typography variant="h1">👌</Typography>
                 <Typography variant='h5' fontWeight='bold'>Easy to use</Typography>
-                <Typography paddingX={5} variant='p'>Intuitive and user-friendly interface.</Typography>
+                <Typography paddingX={1} variant='p'>Intuitive and user-friendly interface.</Typography>
             </MyCard>
             <MyCard elevation={10}>
                 <Typography variant="h1">📦</Typography>

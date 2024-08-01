@@ -4,15 +4,16 @@ import { AppBar, Box, Button, Card, Container, Stack, Typography } from "@mui/ma
 import Image from "next/image";
 import CardStack from "./Components/CardStack";
 import Footer from "./Components/Footer";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <>
       <Box
         sx={{
-          padding: '100px',
-          height: '100dvh',
-          width: '100%',
+          padding: { xs: '50px', sm: '100px' },
+          height: '100%',
+          width: '100vw',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
@@ -23,9 +24,8 @@ export default function Home() {
         <Typography marginBottom="20px" textAlign='center' fontWeight={700} variant="h3" >Welcome to Inventory Manager</Typography>
         <Typography marginBottom="50px" textAlign='center' variant="p">Track, Manage, Succeed.</Typography>
         <CardStack />
-        <Button sx={{
-        }} color="secondary" variant="contained">Start Tracking</Button>
-        <Footer></Footer>
+        <Link href="/dashboard"><Button color="primary" variant="contained">Start Tracking</Button></Link>
+        <Footer />
       </Box>
     </>
   );
