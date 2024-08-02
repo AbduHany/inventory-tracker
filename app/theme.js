@@ -1,6 +1,6 @@
 'use client'
 import { createTheme } from "@mui/material";
-import { green } from "@mui/material/colors";
+import { green, white } from "@mui/material/colors";
 
 export const theme = createTheme({
     palette: {
@@ -9,6 +9,9 @@ export const theme = createTheme({
         },
         secondary: {
             main: green[300]
+        },
+        buttonColor: {
+            main: 'white',
         }
     },
     typography: {

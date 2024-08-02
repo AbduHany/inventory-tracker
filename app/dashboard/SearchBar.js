@@ -7,10 +7,24 @@ const SearchBar = () => {
 
     return (
         <>
-            <Box display='flex' justifyContent='center' marginY={4}>
-                <TextField InputProps={
-                    { endAdornment: (<InputAdornment><SearchIcon /></InputAdornment>) }
-                } prefix='Hey' id="outlined-basic" label="Search..." variant="outlined" sx={{ width: '100vw' }} />
+            <Box
+                display='flex'
+                justifyContent='center'
+                marginY={2}>
+                <TextField
+                    size='small'
+                    InputProps={{
+                        endAdornment: (<InputAdornment><SearchIcon /></InputAdornment>)
+                    }}
+                    prefix='Hey'
+                    id="outlined-basic"
+                    label="Search..."
+                    variant="outlined"
+                    sx={{
+                        width: '30vw',
+                        backgroundColor: 'white',
+                        borderRadius: '4px'
+                    }} />
             </Box>
         </>
     )
