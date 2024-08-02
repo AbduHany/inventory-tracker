@@ -3,6 +3,11 @@ import { Box, Divider, IconButton, List, ListItem, Typography } from '@mui/mater
 import React from 'react'
 
 const InventoryObjects = ({ collectionName, items, setItem }) => {
+
+    const handleDelete = (idx) => {
+
+    }
+
     return (
         <List sx={{ width: '100%', padding: '0' }}>
             <Typography sx={{ marginY: '15px' }} fontWeight='bold' fontSize={20} textAlign='center' variant='h5'>Your Pantry Items</Typography>
@@ -14,10 +19,10 @@ const InventoryObjects = ({ collectionName, items, setItem }) => {
                         <Typography fontSize={12}>{val.quantity} {val.unit}</Typography>
                     </Box>
                     <Box>
-                        <IconButton>
+                        <IconButton  >
                             <Edit />
                         </IconButton>
-                        <IconButton>
+                        <IconButton onClick={() => { handleDelete(val.name, val.quantity, val.unit) }} >
                             <Delete />
                         </IconButton>
                     </Box>

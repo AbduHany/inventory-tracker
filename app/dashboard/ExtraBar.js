@@ -6,20 +6,29 @@ const ExtraBar = () => {
     return (
         <Box sx={{
             display: 'flex',
+            flexDirection: { xs: 'column', sm: 'row' },
             justifyContent: 'center',
-            gap: '50px',
+            alignItems: 'center',
+            gap: '8px',
             marginBottom: '10px',
         }}>
-            <Button
-                size='small'
-                variant='contained'
+            <Box>
+                <Button
+                    size='small'
+                    variant='contained'
+                >
+                    📷 Add using Camera 📷
+                </Button>
+            </Box>
+            <Box >
+                <Button
+                    variant='contained'
+                    size='small'
+                >
+                    ✨ AI Recipe ✨
+                </Button>
+            </Box>
 
-            >
-                📷 Add using Camera 📷
-            </Button>
-            <Button variant='contained'>
-                ✨ AI Recipe ✨
-            </Button>
         </Box>
     )
 }

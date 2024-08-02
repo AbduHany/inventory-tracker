@@ -6,12 +6,12 @@ import { getFirestore } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDHSEqcRBxSmZsB1RQT3tjxhxyXtRmnegs",
-    authDomain: "inventory-manager-14fb3.firebaseapp.com",
-    projectId: "inventory-manager-14fb3",
-    storageBucket: "inventory-manager-14fb3.appspot.com",
-    messagingSenderId: "231760544189",
-    appId: "1:231760544189:web:f7792d3448b039599392d4"
+    apiKey: "AIzaSyBBMhkFgU9xzKgDnmK8H0JJAxQJvRw9qvs",
+    authDomain: "inventory-tracker-62188.firebaseapp.com",
+    projectId: "inventory-tracker-62188",
+    storageBucket: "inventory-tracker-62188.appspot.com",
+    messagingSenderId: "1001385894982",
+    appId: "1:1001385894982:web:3a879d262032035c38d647"
 };
 
 // When deploying!

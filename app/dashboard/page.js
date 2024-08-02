@@ -16,15 +16,20 @@ const DashboardPage = ({ searchParams }) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const collectionRef = collection(db, collectionName);
-            const querySnapshot = await getDocs(collectionRef);
-            const documents = querySnapshot.docs.map(doc => ({
-                ...doc.data()
-            }));
-            setItem(documents)
+            try {
+                const collectionRef = collection(db, collectionName);
+                const querySnapshot = await getDocs(collectionRef);
+                const documents = querySnapshot.docs.map(doc => ({
+                    ...doc.data()
+                }));
+                setItem(documents)
+            } catch (e) {
+                console.log(e)
+            }
+
         }
         fetchData();
-    }, [items, setItem, collectionName])
+    }, [])
 
     return (
         <>
