@@ -32,7 +32,7 @@ const CardStack = () => {
             <MyCard elevation={10}>
                 <Typography variant="h1">📷</Typography>
                 <Typography variant='h5' fontWeight='bold'>Camera Scanning</Typography>
-                <Typography padding={1} variant='p'>Quickly scan items using your device's camera.</Typography>
+                <Typography padding={1} variant='p'>Quickly scan items using your device&apos;s camera.</Typography>
                 <Typography></Typography>
             </MyCard>
         </Stack>

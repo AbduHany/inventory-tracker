@@ -21,9 +21,9 @@ const SearchBar = () => {
                     label="Search..."
                     variant="outlined"
                     sx={{
-                        width: '30vw',
                         backgroundColor: 'white',
-                        borderRadius: '4px'
+                        borderRadius: '4px',
+                        maxWidth: '500px'
                     }} />
             </Box>
         </>

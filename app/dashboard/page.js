@@ -1,14 +1,30 @@
+'use client'
 import { Box, Card, List, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SearchBar from './SearchBar'
 import AddBar from './AddBar'
 import Footer from '../Components/Footer'
 import InventoryObjects from './InventoryObjects'
 import ExtraBar from './ExtraBar'
+import { db } from '../firebaseConfig'
+import { collection, getDocs } from 'firebase/firestore'
 
-const page = () => {
+const DashboardPage = ({ searchParams }) => {
 
+    const collectionName = searchParams.email
+    const [items, setItem] = useState([]);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            const collectionRef = collection(db, collectionName);
+            const querySnapshot = await getDocs(collectionRef);
+            const documents = querySnapshot.docs.map(doc => ({
+                ...doc.data()
+            }));
+            setItem(documents)
+        }
+        fetchData();
+    }, [items, setItem, collectionName])
 
     return (
         <>
@@ -26,7 +42,7 @@ const page = () => {
                 >Inventory Manager 📦
                 </Typography>
                 <SearchBar />
-                <AddBar />
+                <AddBar collectionName={collectionName} items={items} setItem={setItem} />
                 <ExtraBar />
                 <Box
                     sx={{
@@ -37,7 +53,7 @@ const page = () => {
                         display: 'flex',
 
                     }}>
-                    <InventoryObjects />
+                    <InventoryObjects collectionName={collectionName} items={items} setItem={setItem} />
                 </Box>
             </Box>
             <Footer />
@@ -45,4 +61,4 @@ const page = () => {
     )
 }
 
-export default page
+export default DashboardPage

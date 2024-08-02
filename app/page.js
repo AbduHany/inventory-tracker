@@ -1,12 +1,34 @@
 'use client'
 import styled from "@emotion/styled";
-import { AppBar, Box, Button, Card, Container, Stack, Typography } from "@mui/material";
+import { AppBar, Box, Button, Card, Container, Stack, TextField, Typography } from "@mui/material";
 import Image from "next/image";
 import CardStack from "./Components/CardStack";
 import Footer from "./Components/Footer";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Home() {
+  const [email, setEmail] = useState();
+  const [error, setError] = useState('');
+
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+  };
+
+  // Handle email input change
+  const handleEmailChange = (event) => {
+    const newEmail = event.target.value;
+    setEmail(newEmail);
+    if (validateEmail(newEmail)) {
+      setError('');
+    } else {
+      setError('Please enter a valid email address.');
+    }
+  };
+
+  const isEmailValid = validateEmail(email);
+
   return (
     <>
       <Box
@@ -24,7 +46,27 @@ export default function Home() {
         <Typography marginBottom="20px" textAlign='center' fontWeight={700} variant="h3" >Welcome to Inventory Manager</Typography>
         <Typography marginBottom="50px" textAlign='center' variant="p">Track, Manage, Succeed.</Typography>
         <CardStack />
-        <Link href="/dashboard"><Button color="primary" variant="contained">Start Tracking</Button></Link>
+        <TextField
+          placeholder="Enter your email"
+          onChange={handleEmailChange}
+          size="small"
+          type="email"
+          error={!!error}
+          helperText={error}
+          sx={{
+            marginBottom: '10px'
+          }}
+        ></TextField>
+        {isEmailValid ? (
+          <Link href={{
+            pathname: '/dashboard',
+            query: { email: email }
+          }}>
+            <Button color="primary" variant="contained">Start Tracking</Button>
+          </Link>
+        ) : (
+          <Button color="primary" variant="contained" >Start Tracking</Button>
+        )}
         <Footer />
       </Box>
     </>

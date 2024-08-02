@@ -1,21 +1,36 @@
 'use client'
 import { Add } from '@mui/icons-material'
 import { Box, Button, MenuItem, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { db } from '../firebaseConfig'
+import { addDoc, collection } from 'firebase/firestore'
 
-const AddBar = () => {
+const AddBar = ({ collectionName, items, setItem }) => {
+
     const units = ['piece', 'lb', 'oz', 'g', 'kg', 'ml', 'L', 'cup']
 
-    const handleAdd = () => {
+    //adds a new item to the items list
+    const handleAdd = async () => {
         if (itemName === '' || quantity === 0)
             alert('Item name or Quantity is missing 😔');
         else {
-            console.log(itemName, quantity, unit);
-            setItemName('')
-            setQuantity(0)
-            setUnit(units[0])
+            try {
+                await addDoc(collection(db, collectionName), {
+                    name: itemName,
+                    quantity,
+                    unit
+                });
+                setItem([...items, { name: itemName, quantity, unit }])
+                setItemName('')
+                setQuantity(0)
+                setUnit(units[0])
+            } catch (e) {
+                console.error('Error adding document: ', e);
+            }
         }
     }
+
+
     const [itemName, setItemName] = useState('');
     const updateItemName = (e) => {
         setItemName(e.target.value)
@@ -32,7 +47,7 @@ const AddBar = () => {
         <>
             <Box
                 display='flex'
-                flexDirection='row'
+                flexDirection={{ xs: 'column', sm: 'row' }}
                 alignItems='center'
                 justifyContent='center'
                 gap={2}
@@ -72,7 +87,6 @@ const AddBar = () => {
                     sx={{
                         backgroundColor: 'white',
                         borderRadius: '4px',
-                        width: '10%',
                     }}
                 >{units.map((val, idx) => (
                     <MenuItem key={idx} value={val}>{val}</MenuItem>
