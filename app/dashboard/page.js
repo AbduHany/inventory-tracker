@@ -50,7 +50,7 @@ const DashboardPage = ({ searchParams }) => {
                 </Typography>
                 <SearchBar itemsCopy={itemsCopy} setItems={setItems} />
                 <AddBar itemsCopy={itemsCopy} setItemsCopy={setItemsCopy} collectionName={collectionName} items={items} setItems={setItems} />
-                <ExtraBar />
+                <ExtraBar itemsCopy={itemsCopy} />
                 <Box
                     sx={{
                         backgroundColor: 'white',

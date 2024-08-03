@@ -1,7 +1,8 @@
 import { Box, Button } from '@mui/material'
 import React from 'react'
+import AIRecipe from './AIRecipe'
 
-const ExtraBar = () => {
+const ExtraBar = ({ itemsCopy }) => {
 
     return (
         <Box sx={{
@@ -14,6 +15,7 @@ const ExtraBar = () => {
         }}>
             <Box>
                 <Button
+                    disabled
                     size='small'
                     variant='contained'
                 >
@@ -21,12 +23,7 @@ const ExtraBar = () => {
                 </Button>
             </Box>
             <Box >
-                <Button
-                    variant='contained'
-                    size='small'
-                >
-                    ✨ AI Recipe ✨
-                </Button>
+                <AIRecipe itemsCopy={itemsCopy} />
             </Box>
 
         </Box>
