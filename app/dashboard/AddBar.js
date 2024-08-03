@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { db } from '../firebaseConfig'
 import { addDoc, collection } from 'firebase/firestore'
 
-const AddBar = ({ collectionName, items, setItem }) => {
+const AddBar = ({ collectionName, items, setItems }) => {
 
     const units = ['piece', 'lb', 'oz', 'g', 'kg', 'ml', 'L', 'cup']
 
@@ -15,12 +15,12 @@ const AddBar = ({ collectionName, items, setItem }) => {
             alert('Item name or Quantity is missing 😔');
         else {
             try {
-                await addDoc(collection(db, collectionName), {
+                const docRef = await addDoc(collection(db, collectionName), {
                     name: itemName,
                     quantity,
                     unit
                 });
-                setItem([...items, { name: itemName, quantity, unit }])
+                setItems([...items, { name: itemName, quantity, unit, id: docRef.id }])
                 setItemName('')
                 setQuantity(0)
                 setUnit(units[0])

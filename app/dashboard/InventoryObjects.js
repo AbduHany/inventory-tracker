@@ -1,11 +1,24 @@
 import { Delete, Edit } from '@mui/icons-material'
 import { Box, Divider, IconButton, List, ListItem, Typography } from '@mui/material'
+import { doc, deleteDoc } from "firebase/firestore"
 import React from 'react'
+import { db } from '../firebaseConfig'
 
-const InventoryObjects = ({ collectionName, items, setItem }) => {
+const InventoryObjects = ({ collectionName, items, setItems }) => {
 
-    const handleDelete = (idx) => {
 
+
+    const handleDelete = async (id, collectionName) => {
+        try {
+            const docRef = doc(db, collectionName, id);
+            await deleteDoc(docRef);
+            setItems(prevData => prevData.filter(item => item.id !== id));
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const handleEdit = async (id, collectionName) => {
     }
 
     return (
@@ -19,10 +32,10 @@ const InventoryObjects = ({ collectionName, items, setItem }) => {
                         <Typography fontSize={12}>{val.quantity} {val.unit}</Typography>
                     </Box>
                     <Box>
-                        <IconButton  >
+                        <IconButton onClick={() => { handleEdit(val.id, collectionName) }} >
                             <Edit />
                         </IconButton>
-                        <IconButton onClick={() => { handleDelete(val.name, val.quantity, val.unit) }} >
+                        <IconButton onClick={() => { handleDelete(val.id, collectionName) }} >
                             <Delete />
                         </IconButton>
                     </Box>

@@ -12,24 +12,25 @@ import { collection, getDocs } from 'firebase/firestore'
 const DashboardPage = ({ searchParams }) => {
 
     const collectionName = searchParams.email
-    const [items, setItem] = useState([]);
+    const [items, setItems] = useState([]);
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const collectionRef = collection(db, collectionName);
-    //             const querySnapshot = await getDocs(collectionRef);
-    //             const documents = querySnapshot.docs.map(doc => ({
-    //                 ...doc.data()
-    //             }));
-    //             setItem(documents)
-    //         } catch (e) {
-    //             console.log(e)
-    //         }
-
-    //     }
-    //     fetchData();
-    // }, [])
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const collectionRef = collection(db, collectionName);
+                const querySnapshot = await getDocs(collectionRef);
+                const documents = querySnapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+                console.log(documents)
+                setItems(documents)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        fetchData();
+    }, [])
 
     return (
         <>
@@ -47,7 +48,7 @@ const DashboardPage = ({ searchParams }) => {
                 >Inventory Manager 📦
                 </Typography>
                 <SearchBar />
-                <AddBar collectionName={collectionName} items={items} setItem={setItem} />
+                <AddBar collectionName={collectionName} items={items} setItems={setItems} />
                 <ExtraBar />
                 <Box
                     sx={{
@@ -58,7 +59,7 @@ const DashboardPage = ({ searchParams }) => {
                         display: 'flex',
 
                     }}>
-                    <InventoryObjects collectionName={collectionName} items={items} setItem={setItem} />
+                    <InventoryObjects collectionName={collectionName} items={items} setItems={setItems} />
                 </Box>
             </Box>
             <Footer />
