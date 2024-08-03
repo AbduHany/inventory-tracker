@@ -3,7 +3,7 @@ import { Box, Divider, IconButton, List, ListItem, Typography } from '@mui/mater
 import { doc, deleteDoc } from "firebase/firestore"
 import React from 'react'
 import { db } from '../firebaseConfig'
-import BasicModal from './EditModal'
+import EditModal from './EditModal'
 
 const InventoryObjects = ({ collectionName, items, setItems }) => {
 
@@ -33,7 +33,7 @@ const InventoryObjects = ({ collectionName, items, setItems }) => {
                         <Typography fontSize={12}>{val.quantity} {val.unit}</Typography>
                     </Box>
                     <Box>
-                        <BasicModal
+                        <EditModal
                             name={val.name}
                             quantity={val.quantity}
                             unit={val.unit} id={val.id}

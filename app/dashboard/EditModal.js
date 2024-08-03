@@ -20,7 +20,7 @@ const style = {
     p: 3,
 };
 
-export default function BasicModal({ name, quantity, unit, id, collectionName, items, setItems }) {
+export default function EditModal({ name, quantity, unit, id, collectionName, items, setItems }) {
 
     const units = ['piece', 'lb', 'oz', 'g', 'kg', 'ml', 'L', 'cup']
 
@@ -36,6 +36,13 @@ export default function BasicModal({ name, quantity, unit, id, collectionName, i
     const [newName, setNewName] = React.useState(name)
     const [newQuantity, setNewQuantity] = React.useState(quantity)
     const [newUnit, setNewUnit] = React.useState(unit)
+
+
+    React.useEffect(() => {
+        setNewName(name)
+        setNewQuantity(quantity)
+        setNewUnit(unit)
+    }, [name, quantity, unit])
 
     const handleNameChange = (e) => { setNewName(n => n = e.target.value) }
     const handleQuantityChange = (e) => { setNewQuantity(n => n = e.target.value) }
@@ -79,7 +86,7 @@ export default function BasicModal({ name, quantity, unit, id, collectionName, i
                         marginBottom={1}
                         variant="h6"
                         component="h2">
-                        Editing {`${name}: ${quantity}${unit}`}
+                        Editing: {`${name} - ${quantity}${unit}`}
                     </Typography>
                     <Box flexDirection={{ md: 'row', xs: 'column' }} justifyContent='center' alignItems='center' display='flex' gap={2}>
                         <TextField
