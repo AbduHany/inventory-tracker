@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { db } from '../firebaseConfig'
 import { addDoc, collection } from 'firebase/firestore'
 
-const AddBar = ({ collectionName, items, setItems }) => {
+const AddBar = ({ itemsCopy, setItemsCopy, collectionName, items, setItems }) => {
 
     const units = ['piece', 'lb', 'oz', 'g', 'kg', 'ml', 'L', 'cup']
 
@@ -21,6 +21,7 @@ const AddBar = ({ collectionName, items, setItems }) => {
                     unit
                 });
                 setItems([...items, { name: itemName, quantity, unit, id: docRef.id }])
+                setItemsCopy([...itemsCopy, { name: itemName, quantity, unit, id: docRef.id }])
                 setItemName('')
                 setQuantity(0)
                 setUnit(units[0])

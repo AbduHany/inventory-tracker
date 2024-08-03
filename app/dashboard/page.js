@@ -13,6 +13,7 @@ const DashboardPage = ({ searchParams }) => {
 
     const collectionName = searchParams.email
     const [items, setItems] = useState([]);
+    const [itemsCopy, setItemsCopy] = useState([...items])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,6 +25,7 @@ const DashboardPage = ({ searchParams }) => {
                     ...doc.data()
                 }));
                 setItems(documents)
+                setItemsCopy(documents)
             } catch (e) {
                 console.log(e)
             }
@@ -46,8 +48,8 @@ const DashboardPage = ({ searchParams }) => {
                     variant='h4'
                 >Inventory Manager 📦
                 </Typography>
-                <SearchBar />
-                <AddBar collectionName={collectionName} items={items} setItems={setItems} />
+                <SearchBar itemsCopy={itemsCopy} setItems={setItems} />
+                <AddBar itemsCopy={itemsCopy} setItemsCopy={setItemsCopy} collectionName={collectionName} items={items} setItems={setItems} />
                 <ExtraBar />
                 <Box
                     sx={{
@@ -58,7 +60,7 @@ const DashboardPage = ({ searchParams }) => {
                         display: 'flex',
 
                     }}>
-                    <InventoryObjects collectionName={collectionName} items={items} setItems={setItems} />
+                    <InventoryObjects itemsCopy={itemsCopy} setItemsCopy={setItemsCopy} collectionName={collectionName} items={items} setItems={setItems} />
                 </Box>
             </Box>
             <Footer />

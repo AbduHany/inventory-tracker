@@ -5,7 +5,7 @@ import React from 'react'
 import { db } from '../firebaseConfig'
 import EditModal from './EditModal'
 
-const InventoryObjects = ({ collectionName, items, setItems }) => {
+const InventoryObjects = ({ itemsCopy, setItemsCopy, collectionName, items, setItems }) => {
 
 
 
@@ -15,6 +15,7 @@ const InventoryObjects = ({ collectionName, items, setItems }) => {
             await deleteDoc(docRef)
                 .then(() => {
                     setItems(items.filter(item => item.id !== id))
+                    setItemsCopy(itemsCopy.filter(item => item.id !== id))
                 });
         } catch (e) {
             console.log(e)

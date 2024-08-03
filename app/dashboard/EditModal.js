@@ -68,7 +68,6 @@ export default function EditModal({ name, quantity, unit, id, collectionName, it
                 .then(() => {
                     setOpen(false)
                 })
-            console.log(newName, newQuantity, newUnit, items, id)
         }
     }
 

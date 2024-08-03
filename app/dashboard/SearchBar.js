@@ -1,9 +1,16 @@
 'use client';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, InputAdornment, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
-const SearchBar = () => {
+const SearchBar = ({ itemsCopy, setItems }) => {
+
+
+    const handleSearch = (e) => {
+        const value = e.target.value.toLowerCase();
+        const filteredItems = itemsCopy.filter(item => item.name.toLowerCase().includes(value));
+        setItems(value === '' ? itemsCopy : filteredItems);
+    }
 
     return (
         <>
@@ -12,6 +19,7 @@ const SearchBar = () => {
                 justifyContent='center'
                 marginY={2}>
                 <TextField
+                    onChange={handleSearch}
                     size='small'
                     InputProps={{
                         endAdornment: (<InputAdornment><SearchIcon /></InputAdornment>)
