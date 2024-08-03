@@ -3,6 +3,7 @@ import { Box, Divider, IconButton, List, ListItem, Typography } from '@mui/mater
 import { doc, deleteDoc } from "firebase/firestore"
 import React from 'react'
 import { db } from '../firebaseConfig'
+import BasicModal from './EditModal'
 
 const InventoryObjects = ({ collectionName, items, setItems }) => {
 
@@ -11,15 +12,15 @@ const InventoryObjects = ({ collectionName, items, setItems }) => {
     const handleDelete = async (id, collectionName) => {
         try {
             const docRef = doc(db, collectionName, id);
-            await deleteDoc(docRef);
-            setItems(prevData => prevData.filter(item => item.id !== id));
+            await deleteDoc(docRef)
+                .then(() => {
+                    setItems(items.filter(item => item.id !== id))
+                });
         } catch (e) {
             console.log(e)
         }
     }
 
-    const handleEdit = async (id, collectionName) => {
-    }
 
     return (
         <List sx={{ width: '100%', padding: '0' }}>
@@ -32,9 +33,14 @@ const InventoryObjects = ({ collectionName, items, setItems }) => {
                         <Typography fontSize={12}>{val.quantity} {val.unit}</Typography>
                     </Box>
                     <Box>
-                        <IconButton onClick={() => { handleEdit(val.id, collectionName) }} >
-                            <Edit />
-                        </IconButton>
+                        <BasicModal
+                            name={val.name}
+                            quantity={val.quantity}
+                            unit={val.unit} id={val.id}
+                            collectionName={collectionName}
+                            items={items}
+                            setItems={setItems}
+                        />
                         <IconButton onClick={() => { handleDelete(val.id, collectionName) }} >
                             <Delete />
                         </IconButton>

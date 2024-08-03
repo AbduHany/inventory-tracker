@@ -23,7 +23,6 @@ const DashboardPage = ({ searchParams }) => {
                     id: doc.id,
                     ...doc.data()
                 }));
-                console.log(documents)
                 setItems(documents)
             } catch (e) {
                 console.log(e)
