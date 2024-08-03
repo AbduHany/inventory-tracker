@@ -2,7 +2,7 @@
 import { Add } from '@mui/icons-material'
 import { Box, Button, MenuItem, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import { db } from '../firebaseConfig'
+import { db } from '../../firebaseConfig'
 import { addDoc, collection } from 'firebase/firestore'
 
 const AddBar = ({ itemsCopy, setItemsCopy, collectionName, items, setItems }) => {

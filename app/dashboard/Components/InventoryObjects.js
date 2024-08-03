@@ -2,7 +2,7 @@ import { Delete, Edit } from '@mui/icons-material'
 import { Box, Divider, IconButton, List, ListItem, Typography } from '@mui/material'
 import { doc, deleteDoc } from "firebase/firestore"
 import React from 'react'
-import { db } from '../firebaseConfig'
+import { db } from '../../firebaseConfig'
 import EditModal from './EditModal'
 
 const InventoryObjects = ({ itemsCopy, setItemsCopy, collectionName, items, setItems }) => {

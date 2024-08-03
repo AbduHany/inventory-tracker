@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { IconButton, MenuItem, TextField } from '@mui/material';
 import { Edit } from '@mui/icons-material';
-import { db } from '../firebaseConfig';
+import { db } from '../../firebaseConfig';
 import { collection, doc, updateDoc } from 'firebase/firestore';
 
 const style = {
