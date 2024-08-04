@@ -4,7 +4,7 @@ import { Box, Button, MenuItem, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { db } from '../../firebaseConfig'
 import { addDoc, collection, doc, updateDoc } from 'firebase/firestore'
-import { ToastContainer, toast, Bounce } from 'react-toastify';
+import { toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AddBar = ({ itemsCopy, setItemsCopy, collectionName, items, setItems }) => {

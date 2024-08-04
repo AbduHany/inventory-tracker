@@ -65,7 +65,7 @@ const DashboardPage = ({ searchParams }) => {
                 </Box>
             </Box>
             <Footer />
-            <ToastContainer />
+            <ToastContainer position='top-center' />
         </>
     )
 }

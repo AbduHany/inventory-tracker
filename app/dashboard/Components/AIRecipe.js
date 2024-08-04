@@ -6,6 +6,7 @@ import Modal from '@mui/material/Modal';
 import { Chip } from '@mui/material';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import ReactMarkdown from 'react-markdown';
+import { toast } from 'react-toastify';
 
 const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GOOGLE_API_KEY);
 
@@ -37,7 +38,7 @@ export default function AIRecipe({ itemsCopy }) {
     Create a detailed recipe based on the following ingredients (you don't have to use all of them): ${JSON.stringify(itemsCopy)} and reply with a json and only a json format, dont give me any text outside the json format.
     The JSON should include: cooking time, prep time, serving size, calories and the text of the recipe itself (only give me the recipe name in the recipeName json key). Like this example and please only stick to this format nothing more or less:
     {
-        calories: (just a number)string,
+        calories: (just a number + the word 'calories')string,
         preptime: string,
         cooktime: string,
         servings: string,
@@ -47,19 +48,33 @@ export default function AIRecipe({ itemsCopy }) {
     `
 
 
-
   const generateRecipe = async () => {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    try {
+      const toastId = toast.promise(
+        new Promise(async (resolve, reject) => {
+          const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+          const prompt = myPrompt;
+          const result = await model.generateContent(prompt);
+          const response = result.response;
+          const text = response.text();
+          const textObject = JSON.parse(text);
+          setOutput(textObject);
+          setButtonText('Generate Again');
+          resolve();
+        }),
+        {
+          pending: 'Generating Recipe...',
+          success: 'Recipe Generated',
+          error: 'Error generating recipe',
+        }
+      );
 
-    const prompt = myPrompt;
-
-    const result = await model.generateContent(prompt);
-    const response = result.response;
-    const text = response.text();
-    const textObject = JSON.parse(text);
-    setOutput(textObject)
-    setButtonText('Generate Again')
-  }
+      // Clean up the toast after it's done
+      toast.dismiss(toastId);
+    } catch (error) {
+      toast.error('Error generating recipe');
+    }
+  };
 
   return (
     <>
