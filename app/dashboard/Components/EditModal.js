@@ -8,6 +8,7 @@ import { IconButton, MenuItem, TextField } from '@mui/material';
 import { Edit } from '@mui/icons-material';
 import { db } from '../../firebaseConfig';
 import { collection, doc, updateDoc } from 'firebase/firestore';
+import { Bounce, toast } from 'react-toastify';
 
 const style = {
     position: 'absolute',
@@ -54,7 +55,17 @@ export default function EditModal({ name, quantity, unit, id, collectionName, it
             newQuantity === '' ||
             newUnit === ''
         ) {
-            alert('Please fill empty fields 🤷')
+            toast.error('Please fill empty fields 🤷', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
         }
         else {
             updateDoc(doc(db, collectionName, id), {
@@ -68,7 +79,7 @@ export default function EditModal({ name, quantity, unit, id, collectionName, it
                 })
                 .then(() => {
                     setOpen(false)
-                })
+                }).catch(e => toast.error(`Error updating item: ${e}`))
         }
     }
 

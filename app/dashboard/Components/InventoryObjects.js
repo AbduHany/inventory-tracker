@@ -4,6 +4,7 @@ import { doc, deleteDoc } from "firebase/firestore"
 import React from 'react'
 import { db } from '../../firebaseConfig'
 import EditModal from './EditModal'
+import { toast } from 'react-toastify'
 
 const InventoryObjects = ({ itemsCopy, setItemsCopy, collectionName, items, setItems }) => {
 
@@ -18,7 +19,7 @@ const InventoryObjects = ({ itemsCopy, setItemsCopy, collectionName, items, setI
                     setItemsCopy(itemsCopy.filter(item => item.id !== id))
                 });
         } catch (e) {
-            console.log(e)
+            toast.error(`Error deleting item: ${e}`)
         }
     }
 

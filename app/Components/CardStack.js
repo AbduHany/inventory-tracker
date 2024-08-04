@@ -30,9 +30,9 @@ const CardStack = () => {
                 <Typography padding={1} variant='p'>Add, remove, and manage items with quantity tracking.</Typography>
             </MyCard>
             <MyCard elevation={10}>
-                <Typography variant="h1">📷</Typography>
-                <Typography variant='h5' fontWeight='bold'>Camera Scanning</Typography>
-                <Typography padding={1} variant='p'>Quickly scan items using your device&apos;s camera.</Typography>
+                <Typography variant="h1">✨</Typography>
+                <Typography variant='h5' fontWeight='bold'>Generate Recipes</Typography>
+                <Typography padding={1} variant='p'>Quickly generate AI recipes based on your inventory.</Typography>
                 <Typography></Typography>
             </MyCard>
         </Stack>

@@ -8,6 +8,7 @@ import InventoryObjects from './Components/InventoryObjects'
 import ExtraBar from './Components/ExtraBar'
 import { db } from '../firebaseConfig'
 import { collection, getDocs } from 'firebase/firestore'
+import { toast, ToastContainer } from 'react-toastify'
 
 const DashboardPage = ({ searchParams }) => {
 
@@ -27,7 +28,7 @@ const DashboardPage = ({ searchParams }) => {
                 setItems(documents)
                 setItemsCopy(documents)
             } catch (e) {
-                console.log(e)
+                toast.error(`Error fetching Panty Items: ${e}`)
             }
         }
         fetchData();
@@ -64,6 +65,7 @@ const DashboardPage = ({ searchParams }) => {
                 </Box>
             </Box>
             <Footer />
+            <ToastContainer />
         </>
     )
 }

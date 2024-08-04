@@ -19,7 +19,7 @@ export default function Home() {
   // Handle email input change
   const handleEmailChange = (event) => {
     const newEmail = event.target.value;
-    setEmail(newEmail);
+    setEmail(newEmail.toLowerCase());
     if (validateEmail(newEmail)) {
       setError('');
     } else {
@@ -65,7 +65,7 @@ export default function Home() {
             <Button color="primary" variant="contained">Start Tracking</Button>
           </Link>
         ) : (
-          <Button color="primary" variant="contained" >Start Tracking</Button>
+          <Button sx={{ marginBottom: '30px' }} color="primary" variant="contained" >Start Tracking</Button>
         )}
         <Footer />
       </Box>

@@ -3,17 +3,61 @@ import { Add } from '@mui/icons-material'
 import { Box, Button, MenuItem, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { db } from '../../firebaseConfig'
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection, doc, updateDoc } from 'firebase/firestore'
+import { ToastContainer, toast, Bounce } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddBar = ({ itemsCopy, setItemsCopy, collectionName, items, setItems }) => {
 
     const units = ['piece', 'lb', 'oz', 'g', 'kg', 'ml', 'L', 'cup']
 
-    //adds a new item to the items list
+    //adds or updates an item to the items list
     const handleAdd = async () => {
-        if (itemName === '' || quantity === 0)
-            alert('Item name or Quantity is missing 😔');
+        if (itemName === '') {
+            toast.error('Item name is missing 😔', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
+        }
+        else if (quantity <= 0) {
+            toast.error('Quantity must be greater than 0 😔', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
+        } else if (items.filter(item => item.name.toLowerCase() === itemName.toLowerCase() && item.unit === unit).length > 0) {
+
+            // Updates an item if the item already exists (same unit)
+            const itemToBeUpdated = items.filter(item => item.name.toLowerCase() === itemName.toLowerCase() && item.unit === unit)[0]
+            const newQuantity = parseInt(quantity) + parseInt(itemToBeUpdated.quantity)
+            updateDoc(doc(db, collectionName, itemToBeUpdated.id), {
+                quantity: newQuantity,
+            })
+                .then(() => {
+                    setItems(i => i.map(item => item.id === itemToBeUpdated.id ? { id: itemToBeUpdated.id, name: item.name, quantity: newQuantity, unit: item.unit } : item))
+                    setItemsCopy(i => i.map(item => item.id === itemToBeUpdated.id ? { id: itemToBeUpdated.id, name: item.name, quantity: newQuantity, unit: item.unit } : item))
+                    setItemName('')
+                    setQuantity(0)
+                    setUnit(units[0])
+                }).catch((e) => {
+                    toast.error(`Error updating document: ${e}`)
+                });
+        }
         else {
+            // Adds a completely new item
             try {
                 const docRef = await addDoc(collection(db, collectionName), {
                     name: itemName,
@@ -26,7 +70,7 @@ const AddBar = ({ itemsCopy, setItemsCopy, collectionName, items, setItems }) =>
                 setQuantity(0)
                 setUnit(units[0])
             } catch (e) {
-                console.error('Error adding document: ', e);
+                toast.error(`Error adding document: ${e}`)
             }
         }
     }

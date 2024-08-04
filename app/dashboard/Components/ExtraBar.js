@@ -19,7 +19,7 @@ const ExtraBar = ({ itemsCopy }) => {
                     size='small'
                     variant='contained'
                 >
-                    📷 Add using Camera 📷
+                    📷 Add using Camera 📷 (soon)
                 </Button>
             </Box>
             <Box >
