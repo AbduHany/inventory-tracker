@@ -20,7 +20,7 @@ const style = {
     p: 3,
 };
 
-export default function EditModal({ name, quantity, unit, id, collectionName, items, setItems }) {
+export default function EditModal({ name, quantity, unit, id, collectionName, items, setItems, itemsCopy, setItemsCopy }) {
 
     const units = ['piece', 'lb', 'oz', 'g', 'kg', 'ml', 'L', 'cup']
 
@@ -62,9 +62,10 @@ export default function EditModal({ name, quantity, unit, id, collectionName, it
                 quantity: newQuantity,
                 unit: newUnit
             })
-                .then(setItems(i => i.map(item =>
-                    item.id === id ? { id: id, name: newName, quantity: newQuantity, unit: newUnit } : item
-                )))
+                .then(() => {
+                    setItems(i => i.map(item => item.id === id ? { id: id, name: newName, quantity: newQuantity, unit: newUnit } : item))
+                    setItemsCopy(i => i.map(item => item.id === id ? { id: id, name: newName, quantity: newQuantity, unit: newUnit } : item))
+                })
                 .then(() => {
                     setOpen(false)
                 })

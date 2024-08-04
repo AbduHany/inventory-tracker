@@ -41,6 +41,8 @@ const InventoryObjects = ({ itemsCopy, setItemsCopy, collectionName, items, setI
                             collectionName={collectionName}
                             items={items}
                             setItems={setItems}
+                            itemsCopy={itemsCopy}
+                            setItemsCopy={setItemsCopy}
                         />
                         <IconButton onClick={() => { handleDelete(val.id, collectionName) }} >
                             <Delete />
